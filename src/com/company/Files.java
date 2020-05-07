@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Files {
-
-        int N = 12500;
+        int N1 = 12500;
+        int N2 = 12500;
         int V = 26;
         public ArrayList<File> folders = new ArrayList<>();
         public ArrayList<File> files = new ArrayList<>();
@@ -18,24 +18,22 @@ public class Files {
             folders.add(new File("C:\\aclImdb\\train\\pos"));
             folders.add(new File("C:\\aclImdb\\train\\unsup"));
 
-            for (int i = 0; i < folders.size() - 1; i++) {
-                for (int k = N / 50 * V; k < N / 50 * (V + 1); k++) {
-                    for (File file : folders.get(i).listFiles()) {
-                        if (file.getName().startsWith(String.valueOf(k))) {
-                            files.add(file);
+            for (int ProcessingFolder = 0; ProcessingFolder < folders.size() - 1; ProcessingFolder++) {
+                for (int FileBeginWith = N1 / 50 * V; FileBeginWith < N1 / 50 * (V + 1); FileBeginWith++) {
+                    for (File file : folders.get(ProcessingFolder).listFiles()) {
+                        if (file.getName().startsWith(String.valueOf(FileBeginWith))) {
+                            files.add(file.getAbsoluteFile());
                         }
                     }
                 }
             }
-            N = 50000;
-            for (int k = N / 50 * V; k < N / 50 * (V + 1); k++) {
+            for (int FileBeginWith = N2 / 50 * V; FileBeginWith < N2 / 50 * (V + 1); FileBeginWith++) {
                 for (File file : folders.get(4).listFiles()) {
-                    if (file.getName().startsWith(String.valueOf(k))) {
-                        files.add(file);
+                    if (file.getName().startsWith(String.valueOf(FileBeginWith))) {
+                        files.add(file.getAbsoluteFile());
                     }
                 }
             }
-
             return files;
         }
 }
