@@ -4,9 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Files {
-        int N1 = 12500;
-        int N2 = 12500;
-        int V = 26;
+
+        public static int N1 = 12500;
+        public static int N2 = 50000;
+        public static int V = 26;
+
         public ArrayList<File> folders = new ArrayList<>();
         public ArrayList<File> files = new ArrayList<>();
 
@@ -27,6 +29,7 @@ public class Files {
                     }
                 }
             }
+
             for (int FileBeginWith = N2 / 50 * V; FileBeginWith < N2 / 50 * (V + 1); FileBeginWith++) {
                 for (File file : folders.get(4).listFiles()) {
                     if (file.getName().startsWith(String.valueOf(FileBeginWith))) {
@@ -34,6 +37,7 @@ public class Files {
                     }
                 }
             }
+
             return files;
         }
 }
