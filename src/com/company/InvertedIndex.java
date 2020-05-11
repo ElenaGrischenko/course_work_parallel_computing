@@ -28,42 +28,45 @@ public class InvertedIndex extends Thread {
     public void run() {
 
         for (int idx = startIndex; idx < endIndex; idx++) {
-            try (BufferedReader file = new BufferedReader(new FileReader((File) processingFiles.get(idx)))) {
+            try (BufferedReader file = new BufferedReader(new FileReader(processingFiles.get(idx)))) {
                 String line;
-                String[] words = new String[0];
+                ArrayList<String> words = new ArrayList<>();
 
                 while ((line = file.readLine()) != null) {
-                    words = line.replaceAll("[^a-zA-Z0-9 ]", "")
+                    line = line.replaceAll("[^a-zA-Z0-9 ]", "")
                             .trim()
                             .replaceAll(" +", " ")
-                            .toLowerCase()
-                            .split(" ");
+                            .toLowerCase();
+                    Collections.addAll(words, line.split(" "));
                 }
 
-                for (int index = 0; index < words.length; index++) {
-                    if(HashMapOneThread.containsKey(words[index])) {
-                        ArrayList<String> list = HashMapOneThread.get(words[index]);
-                        list.add(String.valueOf(index + 1));
-                        HashMapOneThread.put(words[index], list);
+                int PositionInFile = 1;
+
+                for(String word: words) {
+                    if(HashMapOneThread.containsKey(word)) {
+                        ArrayList<String> list = HashMapOneThread.get(word);
+                        list.add(String.valueOf(PositionInFile));
+                        HashMapOneThread.put(word, list);
                     }
                     else {
                         ArrayList<String> list = new ArrayList<String>();
-                        list.add(String.valueOf(index + 1));
-                        HashMapOneThread.put(words[index], list);
+                        list.add(String.valueOf(PositionInFile));
+                        HashMapOneThread.put(word, list);
                     }
+
+                    PositionInFile ++;
                 }
 
                 for (String word: words) {
                     ArrayList<String> list = HashMapOneThread.get(word);
 
-                    if (!list.contains(processingFiles.get(idx).getParent() + "\\" + processingFiles.get(idx).getName())) {
-                        list.add(processingFiles.get(idx).getParent() + "\\" + processingFiles.get(idx).getName());
+                    if (!list.contains(String.valueOf(processingFiles.get(idx)))) {
+                        list.add(String.valueOf(processingFiles.get(idx)));
                         HashMapOneThread.put(word, list);
                     }
                 }
-
             }catch (IOException e) {
-                System.out.println("File: " + processingFiles.get(idx).getParent() + "\\" + processingFiles.get(idx).getName() + " not found.");
+                System.out.println("File: " + processingFiles.get(idx) + " not found.");
             }
         }
     }
