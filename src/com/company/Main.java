@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Main {
 
-    public static int NUMBER_THREADS = 3;
+    public static int NUMBER_THREADS = 2000;
 
     public static void main(String[] args) throws IOException {
 
@@ -16,11 +16,13 @@ public class Main {
 
         HashMap<String, ArrayList<String>> FullInvertedIndex = new HashMap<String, ArrayList<String>>();
 
-        InvertedIndex ThreadArray[] = new InvertedIndex[NUMBER_THREADS];
+        long start = System.currentTimeMillis();
+
+        InvertedIndex[] ThreadArray = new InvertedIndex[NUMBER_THREADS];
 
         for(int i = 0; i < NUMBER_THREADS; i++) {
-            ThreadArray[i] = new InvertedIndex(files.size()/NUMBER_THREADS * i,
-                    i == (NUMBER_THREADS - 1)?files.size():files.size()/NUMBER_THREADS * (i-1),
+            ThreadArray[i] = new InvertedIndex(files.size() / NUMBER_THREADS * i,
+                    i == (NUMBER_THREADS - 1) ? files.size() : files.size() / NUMBER_THREADS * (i + 1),
                     files);
             ThreadArray[i].start();
         }
@@ -40,6 +42,8 @@ public class Main {
                 return list;
             }));
         }
+
+        System.out.println("Processing time: " + (System.currentTimeMillis() - start));
 
         FileWriter fw = new FileWriter( "C:\\InvertedIdx.txt" );
 
