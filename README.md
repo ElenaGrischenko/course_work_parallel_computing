@@ -18,8 +18,7 @@ Note: Do not copy the folder itself; open the folder and copy the contents.
 ## Compile an run on the comand line
 
 If you know how to compile programs on the command line, and if you have
-downloaded the programm, you can easily compile and run programm. Just 
-change into one of the chapter directories inside "sources" and use
+downloaded the programm, you can easily compile and run programm. Just use
 the command 
 
                   javac ExampleClassName.java
