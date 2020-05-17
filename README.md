@@ -3,10 +3,10 @@
 ## General info
 
 This system model builds an inverted index in a parallel environment. 
-Inverted index is a data structure in which for each word of document 
-collections in the corresponding list the positions of the words in the 
-document are overframed and the path to the documents - in which it 
-occurs. An inverted index is used to search for texts.
+An inverted index is a data structure in which for each word in a 
+document from the collections in the corresponding list is the position
+of the word in the document and the path to the documents. 
+An inverted index is used to search for texts.
 
 ## Run in an IDEA
 
