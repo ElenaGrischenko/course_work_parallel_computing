@@ -27,6 +27,6 @@ the command
 to compile programm from folder. You can then run individual programs 
 using the java command. For example:
 
-                  java Main
+                  java ExampleClassName
                   
 
