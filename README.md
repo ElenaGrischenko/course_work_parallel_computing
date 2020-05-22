@@ -11,8 +11,8 @@ An inverted index is used to search for texts.
 ## Run in an IDEA
 
 If you want to run the examples in an IDEA, you should be able to copy 
-the entire contents of any one of the folder into a project in the IDE, 
-and then run the programs. 
+the entire contents of the folder into a project in the IDE, 
+and then run the program. 
 Note: Do not copy the folder itself; open the folder and copy the contents.
 
 ## Compile an run on the comand line
@@ -23,8 +23,8 @@ the command
 
                   javac ExampleClassName.java
                   
-to compile programm from folder. You can then run individual programs 
-using the java command. For example:
+to compile programm from folder. You can then run programsusing the java 
+command. For example:
 
                   java ExampleClassName
                   
